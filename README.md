@@ -63,7 +63,7 @@ vida-plus/
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/vida-plus.git
+git clone https://github.com/RicardoMedeiros1/vidaplus_projetofinal.git
 ```
 
 2. Abra o arquivo `index.html` em seu navegador
