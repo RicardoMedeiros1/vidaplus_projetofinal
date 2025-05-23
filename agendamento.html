@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos - Vida Plus</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Estilos modernos para cards e campos */
+        .modern-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .modern-card .card-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+
+        .modern-card .card-body {
+            padding: 2rem;
+        }
+
+        .modern-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-form-label {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .modern-form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .modern-form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modern-btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .modern-btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .modern-calendar {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .modern-calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-calendar-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .modern-calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .modern-calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-calendar-day:hover {
+            background: rgba(19, 0, 88, 0.1);
+        }
+
+        .modern-calendar-day.active {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .modern-calendar-day.has-event {
+            position: relative;
+        }
+
+        .modern-calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .modern-time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modern-time-slot {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-time-slot:hover {
+            border-color: var(--primary-color);
+            background: rgba(19, 0, 88, 0.05);
+        }
+
+        .modern-time-slot.selected {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .modern-appointment-list {
+            margin-top: 2rem;
+        }
+
+        .modern-appointment-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: 12px;
+            background: var(--light-bg);
+            margin-bottom: 1rem;
+        }
+
+        .modern-appointment-time {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-right: 1rem;
+        }
+
+        .modern-appointment-info {
+            flex: 1;
+        }
+
+        .modern-appointment-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .modern-appointment-subtitle {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .modern-appointment-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .modern-appointment-btn {
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-appointment-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .modern-appointment-btn-info {
+            background: rgba(19, 0, 88, 0.1);
+            color: var(--primary-color);
+        }
+
+        .modern-appointment-btn-warning {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .modern-appointment-btn-danger {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+        <div class="navbar-brand">
+            <img src="img/logobranca.png" alt="Logo Vida Plus">
+        </div>
+        <div class="navbar-collapse">
+            <div class="profile-section">
+                <img src="https://cimrad.com.br/wp-content/uploads/elementor/thumbs/DSC06813.opti_-scaled-e1706629611456-r49r9bpx3k16kks5dbz0k7h57vvni4cg4rbaxecuq0.webp" alt="Foto do usuário">
+                <div class="name">Dr. Ricardo</div>
+                <div class="role">Médico</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="pacientes.html">
+                        <i class="fas fa-user-injured"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profissionais.html">
+                        <i class="fas fa-user-md"></i>
+                        Profissionais
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="agendamento.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="telemedicina.html">
+                        <i class="fas fa-video"></i>
+                        Telemedicina
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <!-- Calendário -->
+                <div class="col-md-8">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Agendamento</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="modern-calendar">
+                                <div class="modern-calendar-header">
+                                    <h3 class="modern-calendar-title">Janeiro 2025</h3>
+                                    <div class="modern-calendar-nav">
+                                        <button class="modern-btn modern-btn-primary">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button class="modern-btn modern-btn-primary">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="modern-calendar-grid">
+                                    <!-- Dias da semana -->
+                                    <div class="modern-calendar-day">Dom</div>
+                                    <div class="modern-calendar-day">Seg</div>
+                                    <div class="modern-calendar-day">Ter</div>
+                                    <div class="modern-calendar-day">Qua</div>
+                                    <div class="modern-calendar-day">Qui</div>
+                                    <div class="modern-calendar-day">Sex</div>
+                                    <div class="modern-calendar-day">Sáb</div>
+                                    
+                                    <!-- Dias do mês -->
+                                    <div class="modern-calendar-day">1</div>
+                                    <div class="modern-calendar-day">2</div>
+                                    <div class="modern-calendar-day">3</div>
+                                    <div class="modern-calendar-day">4</div>
+                                    <div class="modern-calendar-day">5</div>
+                                    <div class="modern-calendar-day">6</div>
+                                    <div class="modern-calendar-day">7</div>
+                                    <!-- ... mais dias ... -->
+                                </div>
+                            </div>
+
+                            <!-- Horários disponíveis -->
+                            <div class="modern-time-slots">
+                                <div class="modern-time-slot">08:00</div>
+                                <div class="modern-time-slot">09:00</div>
+                                <div class="modern-time-slot">10:00</div>
+                                <div class="modern-time-slot">11:00</div>
+                                <div class="modern-time-slot">14:00</div>
+                                <div class="modern-time-slot">15:00</div>
+                                <div class="modern-time-slot">16:00</div>
+                                <div class="modern-time-slot">17:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário de Agendamento -->
+                <div class="col-md-4">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Novo Agendamento</h2>
+                        </div>
+                        <div class="card-body">
+                            <form id="agendamentoForm">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Paciente</label>
+                                    <select class="modern-form-control">
+                                        <option value="">Selecione o paciente</option>
+                                        <option value="1">Maria Silva</option>
+                                        <option value="2">João Santos</option>
+                                    </select>
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Profissional</label>
+                                    <select class="modern-form-control">
+                                        <option value="">Selecione o profissional</option>
+                                        <option value="1">Dr. Carlos Santos</option>
+                                        <option value="2">Dra. Ana Oliveira</option>
+                                    </select>
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Tipo de Consulta</label>
+                                    <select class="modern-form-control">
+                                        <option value="">Selecione o tipo</option>
+                                        <option value="1">Consulta Regular</option>
+                                        <option value="2">Retorno</option>
+                                        <option value="3">Emergência</option>
+                                    </select>
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Observações</label>
+                                    <textarea class="modern-form-control" rows="3" placeholder="Digite observações relevantes"></textarea>
+                                </div>
+
+                                <button type="submit" class="modern-btn modern-btn-primary w-100">
+                                    <i class="fas fa-calendar-check me-2"></i>
+                                    Confirmar Agendamento
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Lista de Agendamentos do Dia -->
+                    <div class="modern-card mt-4">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Agendamentos do Dia</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="modern-appointment-list">
+                                <div class="modern-appointment-item">
+                                    <div class="modern-appointment-time">09:00</div>
+                                    <div class="modern-appointment-info">
+                                        <div class="modern-appointment-title">Maria Silva</div>
+                                        <div class="modern-appointment-subtitle">Dr. Carlos Santos - Consulta Regular</div>
+                                    </div>
+                                    <div class="modern-appointment-actions">
+                                        <button class="modern-appointment-btn modern-appointment-btn-info">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="modern-appointment-btn modern-appointment-btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="modern-appointment-btn modern-appointment-btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Função para mostrar notificações
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type} alert-dismissible fade show`;
+            notification.innerHTML = `
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove a notificação após 5 segundos
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html> 

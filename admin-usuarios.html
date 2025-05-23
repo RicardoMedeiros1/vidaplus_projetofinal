@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários - Vida Plus</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Estilos modernos para cards e campos */
+        .modern-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .modern-card .card-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+
+        .modern-card .card-body {
+            padding: 2rem;
+        }
+
+        .modern-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-form-label {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .modern-form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .modern-form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modern-btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .modern-btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 1rem;
+        }
+
+        .modern-table th {
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 500;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .modern-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modern-table tr:hover {
+            background: rgba(19, 0, 88, 0.02);
+        }
+
+        .modern-search {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-search input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .modern-search input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+            outline: none;
+        }
+
+        .modern-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .modern-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .modern-badge-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .modern-badge-warning {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .modern-badge-danger {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .modern-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modern-action-btn:hover {
+            background: rgba(19, 0, 88, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .modern-action-btn.delete:hover {
+            color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .modern-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .modern-switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .modern-switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .modern-switch input:checked + .modern-switch-slider {
+            background-color: var(--primary-color);
+        }
+
+        .modern-switch input:checked + .modern-switch-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Estilos específicos da página de usuários */
+        .users-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .users-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        
+        .users-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .users-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .users-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .users-table th {
+            background: #f8f9fa;
+            padding: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: left;
+        }
+        
+        .users-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .users-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-name {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .user-email {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .user-role {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .user-role.admin {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .user-role.user {
+            background: rgba(19, 0, 88, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .user-action-btn {
+            padding: 0.5rem;
+            border-radius: 50%;
+            color: #666;
+            transition: var(--transition);
+        }
+        
+        .user-action-btn:hover {
+            background: #f8f9fa;
+            color: var(--accent-color);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .users-content {
+                padding: 1rem;
+            }
+            
+            .users-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        /* Estilos para as partes do usuário */
+        .user-parts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .user-part-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .user-part-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .user-part-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .user-part-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .user-part-icon i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .user-part-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .user-part-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .user-part-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .user-part-stat {
+            text-align: center;
+        }
+
+        .user-part-stat-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .user-part-stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+                <img src="img/logobranca.png" alt="Vida Plus Logo" style="max-height: 200px; margin: 0 auto;">
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-collapse">
+            <div class="profile-section">
+                <img src="https://cimrad.com.br/wp-content/uploads/elementor/thumbs/DSC06813.opti_-scaled-e1706629611456-r49r9bpx3k16kks5dbz0k7h57vvni4cg4rbaxecuq0.webp" alt="Foto do usuário">
+                <div class="name">Admin</div>
+                <div class="role">Administrador</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="pacientes.html">
+                        <i class="fas fa-user-injured"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profissionais.html">
+                        <i class="fas fa-user-md"></i>
+                        Profissionais
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendamento.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="telemedicina.html">
+                        <i class="fas fa-video"></i>
+                        Telemedicina
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <!-- Lista de Usuários -->
+                <div class="col-md-12">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Usuários</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="modern-search">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Buscar usuário...">
+                            </div>
+                            <div class="table-responsive">
+                                <table class="modern-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Email</th>
+                                            <th>Função</th>
+                                            <th>Status</th>
+                                            <th>Último Acesso</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://via.placeholder.com/32" class="rounded-circle me-2" alt="Dr. Carlos Santos">
+                                                    <div>
+                                                        <div class="fw-bold">Dr. Carlos Santos</div>
+                                                        <small class="text-muted">CRM: 12345</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>carlos.santos@vidaplus.com</td>
+                                            <td>Médico</td>
+                                            <td><span class="modern-badge modern-badge-success">Ativo</span></td>
+                                            <td>15/03/2024 14:30</td>
+                                            <td>
+                                                <button class="modern-action-btn" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="modern-action-btn" title="Permissões">
+                                                    <i class="fas fa-key"></i>
+                                                </button>
+                                                <button class="modern-action-btn delete" title="Excluir">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="https://via.placeholder.com/32" class="rounded-circle me-2" alt="Dra. Ana Oliveira">
+                                                    <div>
+                                                        <div class="fw-bold">Dra. Ana Oliveira</div>
+                                                        <small class="text-muted">CRM: 67890</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>ana.oliveira@vidaplus.com</td>
+                                            <td>Médica</td>
+                                            <td><span class="modern-badge modern-badge-warning">Inativo</span></td>
+                                            <td>14/03/2024 16:45</td>
+                                            <td>
+                                                <button class="modern-action-btn" title="Editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="modern-action-btn" title="Permissões">
+                                                    <i class="fas fa-key"></i>
+                                                </button>
+                                                <button class="modern-action-btn delete" title="Excluir">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novo Usuário -->
+                <div class="col-md-12 mt-4">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Novo Usuário</h2>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Nome Completo</label>
+                                            <input type="text" class="modern-form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Email</label>
+                                            <input type="email" class="modern-form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Função</label>
+                                            <select class="modern-select" required>
+                                                <option value="">Selecione uma função</option>
+                                                <option value="medico">Médico</option>
+                                                <option value="enfermeiro">Enfermeiro</option>
+                                                <option value="recepcionista">Recepcionista</option>
+                                                <option value="admin">Administrador</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Status</label>
+                                            <label class="modern-switch">
+                                                <input type="checkbox" checked>
+                                                <span class="modern-switch-slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Senha</label>
+                                            <input type="password" class="modern-form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Confirmar Senha</label>
+                                            <input type="password" class="modern-form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="modern-btn modern-btn-primary">
+                                    Criar Usuário
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Máscara para CPF
+        document.querySelector('input[type="text"][placeholder="000.000.000-00"]').addEventListener('input', function (e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})/);
+            e.target.value = !x[2] ? x[1] : x[1] + '.' + x[2] + (x[3] ? '.' + x[3] : '') + (x[4] ? '-' + x[4] : '');
+        });
+
+        // Máscara para telefone
+        document.querySelector('input[type="tel"]').addEventListener('input', function (e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+
+        // Validação do formulário
+        document.getElementById('usuarioForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aqui você pode adicionar a lógica para salvar os dados
+            showNotification('Usuário cadastrado com sucesso!', 'success');
+            this.reset();
+        });
+
+        // Função para mostrar notificações
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification is-${type}`;
+            notification.innerHTML = `
+                <button class="delete"></button>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove a notificação após 5 segundos
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+            
+            // Permite fechar a notificação manualmente
+            notification.querySelector('.delete').addEventListener('click', () => {
+                notification.remove();
+            });
+        }
+    </script>
+</body>
+</html> 

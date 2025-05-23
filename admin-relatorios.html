@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - Vida Plus</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Estilos modernos para cards e campos */
+        .modern-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .modern-card .card-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+
+        .modern-card .card-body {
+            padding: 2rem;
+        }
+
+        .modern-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-form-label {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .modern-form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .modern-form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modern-btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .modern-btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-date-range {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .modern-date-range input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .modern-date-range input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .modern-stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .modern-stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .modern-stat-title {
+            color: #666;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modern-stat-value {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .modern-stat-change {
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modern-stat-change.positive {
+            color: #2e7d32;
+        }
+
+        .modern-stat-change.negative {
+            color: #c62828;
+        }
+
+        .modern-chart-container {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .modern-chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-chart-title {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .modern-chart-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .modern-chart-action {
+            padding: 0.5rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .modern-chart-action:hover {
+            background: rgba(19, 0, 88, 0.05);
+            color: var(--primary-color);
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 1rem;
+        }
+
+        .modern-table th {
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 500;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .modern-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modern-table tr:hover {
+            background: rgba(19, 0, 88, 0.02);
+        }
+
+        .modern-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .modern-badge-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .modern-badge-warning {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .modern-badge-danger {
+            background: #ffebee;
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+        <div class="navbar-brand">
+            <img src="img/logobranca.png" alt="Logo Vida Plus">
+        </div>
+        <div class="navbar-collapse">
+            <div class="profile-section">
+                <img src="https://cimrad.com.br/wp-content/uploads/elementor/thumbs/DSC06813.opti_-scaled-e1706629611456-r49r9bpx3k16kks5dbz0k7h57vvni4cg4rbaxecuq0.webp" alt="Foto do usuário">
+                <div class="name">Admin</div>
+                <div class="role">Administrador</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="pacientes.html">
+                        <i class="fas fa-user-injured"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profissionais.html">
+                        <i class="fas fa-user-md"></i>
+                        Profissionais
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendamento.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="telemedicina.html">
+                        <i class="fas fa-video"></i>
+                        Telemedicina
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <!-- Filtros -->
+                <div class="col-md-12">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Filtros</h2>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Tipo de Relatório</label>
+                                            <select class="modern-select">
+                                                <option>Consultas</option>
+                                                <option>Pacientes</option>
+                                                <option>Financeiro</option>
+                                                <option>Desempenho</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Período</label>
+                                            <div class="modern-date-range">
+                                                <input type="date" class="modern-form-control">
+                                                <span>até</span>
+                                                <input type="date" class="modern-form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="modern-form-group">
+                                            <label class="modern-form-label">Profissional</label>
+                                            <select class="modern-select">
+                                                <option>Todos</option>
+                                                <option>Dr. Carlos Santos</option>
+                                                <option>Dra. Ana Oliveira</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" class="modern-btn modern-btn-primary">
+                                    Gerar Relatório
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estatísticas -->
+                <div class="col-md-12 mt-4">
+                    <div class="modern-stats-grid">
+                        <div class="modern-stat-card">
+                            <div class="modern-stat-title">Total de Consultas</div>
+                            <div class="modern-stat-value">1,234</div>
+                            <div class="modern-stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                12% em relação ao mês anterior
+                            </div>
+                        </div>
+                        <div class="modern-stat-card">
+                            <div class="modern-stat-title">Novos Pacientes</div>
+                            <div class="modern-stat-value">89</div>
+                            <div class="modern-stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                8% em relação ao mês anterior
+                            </div>
+                        </div>
+                        <div class="modern-stat-card">
+                            <div class="modern-stat-title">Taxa de Ocupação</div>
+                            <div class="modern-stat-value">85%</div>
+                            <div class="modern-stat-change negative">
+                                <i class="fas fa-arrow-down"></i>
+                                3% em relação ao mês anterior
+                            </div>
+                        </div>
+                        <div class="modern-stat-card">
+                            <div class="modern-stat-title">Receita Total</div>
+                            <div class="modern-stat-value">R$ 45.678</div>
+                            <div class="modern-stat-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                15% em relação ao mês anterior
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráficos -->
+                <div class="col-md-8">
+                    <div class="modern-chart-container">
+                        <div class="modern-chart-header">
+                            <h3 class="modern-chart-title">Consultas por Especialidade</h3>
+                            <div class="modern-chart-actions">
+                                <button class="modern-chart-action" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="modern-chart-action" title="Expandir">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="height: 300px;">
+                            <!-- Aqui vai o gráfico -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="modern-chart-container">
+                        <div class="modern-chart-header">
+                            <h3 class="modern-chart-title">Distribuição de Pacientes</h3>
+                            <div class="modern-chart-actions">
+                                <button class="modern-chart-action" title="Download">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                                <button class="modern-chart-action" title="Expandir">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chart-container" style="height: 300px;">
+                            <!-- Aqui vai o gráfico -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela de Dados -->
+                <div class="col-md-12">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Dados Detalhados</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="modern-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Especialidade</th>
+                                            <th>Profissional</th>
+                                            <th>Pacientes</th>
+                                            <th>Status</th>
+                                            <th>Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>15/03/2024</td>
+                                            <td>Clínico Geral</td>
+                                            <td>Dr. Carlos Santos</td>
+                                            <td>12</td>
+                                            <td><span class="modern-badge modern-badge-success">Concluído</span></td>
+                                            <td>R$ 1.200,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>14/03/2024</td>
+                                            <td>Cardiologia</td>
+                                            <td>Dra. Ana Oliveira</td>
+                                            <td>8</td>
+                                            <td><span class="modern-badge modern-badge-warning">Em Andamento</span></td>
+                                            <td>R$ 800,00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Configuração dos gráficos
+        const atendimentosCtx = document.getElementById('atendimentosChart').getContext('2d');
+        const faturamentoCtx = document.getElementById('faturamentoChart').getContext('2d');
+        const idadeCtx = document.getElementById('idadeChart').getContext('2d');
+        const satisfacaoCtx = document.getElementById('satisfacaoChart').getContext('2d');
+
+        // Gráfico de Atendimentos por Especialidade
+        new Chart(atendimentosCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Clínico Geral', 'Cardiologia', 'Dermatologia', 'Ginecologia', 'Neurologia', 'Oftalmologia'],
+                datasets: [{
+                    label: 'Atendimentos',
+                    data: [250, 180, 150, 200, 120, 160],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)',
+                        'rgba(255, 159, 64, 0.8)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Evolução de Faturamento
+        new Chart(faturamentoCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                datasets: [{
+                    label: 'Faturamento (R$)',
+                    data: [35000, 42000, 38000, 45000, 42000, 45678],
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1,
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return 'R$ ' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Distribuição por Idade
+        new Chart(idadeCtx, {
+            type: 'pie',
+            data: {
+                labels: ['0-18', '19-30', '31-45', '46-60', '60+'],
+                datasets: [{
+                    data: [15, 25, 30, 20, 10],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(153, 102, 255, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Satisfação por Profissional
+        new Chart(satisfacaoCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Dr. João Silva', 'Dra. Maria Santos', 'Dr. Pedro Oliveira', 'Dra. Ana Costa', 'Dr. Carlos Lima'],
+                datasets: [{
+                    label: 'Satisfação',
+                    data: [4.8, 4.9, 4.7, 4.6, 4.8],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+
+        // Event Listeners
+        document.getElementById('gerarRelatorio').addEventListener('click', function() {
+            // Aqui você pode adicionar a lógica para atualizar os gráficos com base nos filtros
+            showNotification('Relatório gerado com sucesso!', 'success');
+        });
+
+        document.getElementById('exportarRelatorio').addEventListener('click', function() {
+            // Aqui você pode adicionar a lógica para exportar o relatório
+            showNotification('Relatório exportado com sucesso!', 'success');
+        });
+
+        // Função para mostrar notificações
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification is-${type}`;
+            notification.innerHTML = `
+                <button class="delete"></button>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove a notificação após 5 segundos
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+            
+            // Permite fechar a notificação manualmente
+            notification.querySelector('.delete').addEventListener('click', () => {
+                notification.remove();
+            });
+        }
+    </script>
+</body>
+</html> 

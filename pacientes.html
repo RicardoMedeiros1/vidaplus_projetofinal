@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes - Vida Plus</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Novos estilos para cards e campos */
+        .modern-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .modern-card .card-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+
+        .modern-card .card-body {
+            padding: 2rem;
+        }
+
+        .modern-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-form-label {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .modern-form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .modern-form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modern-btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .modern-btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .modern-table th {
+            background: var(--light-bg);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .modern-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modern-table tr:hover {
+            background: var(--light-bg);
+        }
+
+        .modern-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .modern-badge-success {
+            background: rgba(76, 175, 80, 0.1);
+            color: var(--accent-color);
+        }
+
+        .modern-badge-warning {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .modern-search {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .modern-search input {
+            padding-left: 3rem;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+        }
+
+        .modern-search i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .modern-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .modern-action-btn {
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .modern-action-btn-info {
+            background: rgba(19, 0, 88, 0.1);
+            color: var(--primary-color);
+        }
+
+        .modern-action-btn-warning {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .modern-action-btn-danger {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+        <div class="navbar-brand">
+            <img src="img/logobranca.png" alt="Logo Vida Plus">
+        </div>
+        <div class="navbar-collapse">
+            <div class="profile-section">
+                <img src="https://cimrad.com.br/wp-content/uploads/elementor/thumbs/DSC06813.opti_-scaled-e1706629611456-r49r9bpx3k16kks5dbz0k7h57vvni4cg4rbaxecuq0.webp" alt="Foto do usuário">
+                <div class="name">Dr. Ricardo</div>
+                <div class="role">Médico</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" href="pacientes.html">
+                        <i class="fas fa-user-injured"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profissionais.html">
+                        <i class="fas fa-user-md"></i>
+                        Profissionais
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendamento.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="telemedicina.html">
+                        <i class="fas fa-video"></i>
+                        Telemedicina
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="modern-card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="h4 mb-0 text-white">Cadastro de Paciente</h2>
+                        <button class="modern-btn modern-btn-primary">
+                            <i class="fas fa-plus me-2"></i>
+                            Novo Paciente
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Formulário de Cadastro -->
+                    <form id="pacienteForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Nome Completo</label>
+                                    <input type="text" class="modern-form-control" placeholder="Digite o nome completo">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">CPF</label>
+                                    <input type="text" class="modern-form-control" placeholder="000.000.000-00">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Data de Nascimento</label>
+                                    <input type="date" class="modern-form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Telefone</label>
+                                    <input type="tel" class="modern-form-control" placeholder="(00) 00000-0000">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Endereço</label>
+                                    <input type="text" class="modern-form-control" placeholder="Digite o endereço completo">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">E-mail</label>
+                                    <input type="email" class="modern-form-control" placeholder="Digite o e-mail">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Convênio</label>
+                                    <select class="modern-form-control">
+                                        <option value="">Selecione o convênio</option>
+                                        <option value="unimed">Unimed</option>
+                                        <option value="amil">Amil</option>
+                                        <option value="sulamerica">SulAmérica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="modern-btn modern-btn-primary w-100">
+                                    <i class="fas fa-save me-2"></i>
+                                    Salvar Paciente
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Lista de Pacientes -->
+            <div class="modern-card mt-4">
+                <div class="card-header">
+                    <h2 class="h4 mb-0 text-white">Lista de Pacientes</h2>
+                </div>
+                <div class="card-body">
+                    <div class="modern-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar paciente...">
+                    </div>
+                    <div class="table-responsive">
+                        <table class="modern-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Telefone</th>
+                                    <th>Convênio</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Maria Silva</td>
+                                    <td>123.456.789-00</td>
+                                    <td>(11) 98765-4321</td>
+                                    <td>Unimed</td>
+                                    <td><span class="modern-badge modern-badge-success">Ativo</span></td>
+                                    <td>
+                                        <div class="modern-actions">
+                                            <button class="modern-action-btn modern-action-btn-info">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="modern-action-btn modern-action-btn-warning">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="modern-action-btn modern-action-btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Adicione mais linhas conforme necessário -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Validação do formulário
+        document.getElementById('pacienteForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!window.vidaPlus.validateForm(e.target)) {
+                window.vidaPlus.showNotification('Por favor, preencha todos os campos obrigatórios.', 'danger');
+                return;
+            }
+
+            // Simulação de cadastro
+            window.vidaPlus.showNotification('Paciente cadastrado com sucesso!', 'success');
+            e.target.reset();
+        });
+
+        // Máscara para CPF
+        const cpfInput = document.querySelector('input[type="text"][placeholder="000.000.000-00"]');
+        cpfInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                e.target.value = value;
+            }
+        });
+
+        // Máscara para telefone
+        const telefoneInput = document.querySelector('input[type="tel"]');
+        telefoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+</html> 

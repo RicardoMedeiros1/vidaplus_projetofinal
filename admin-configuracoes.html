@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Vida Plus</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Estilos modernos para cards e campos */
+        .modern-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .modern-card .card-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+
+        .modern-card .card-body {
+            padding: 2rem;
+        }
+
+        .modern-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-form-label {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .modern-form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .modern-form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modern-btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .modern-btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .modern-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .modern-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .modern-switch-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .modern-switch-slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        .modern-switch input:checked + .modern-switch-slider {
+            background-color: var(--primary-color);
+        }
+
+        .modern-switch input:checked + .modern-switch-slider:before {
+            transform: translateX(26px);
+        }
+
+        .modern-color-picker {
+            width: 100%;
+            height: 40px;
+            padding: 0;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .modern-color-picker:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .modern-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .modern-textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        /* Estilos específicos da página de configurações */
+        .settings-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .settings-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        
+        .settings-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .settings-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .settings-form {
+            max-width: 600px;
+        }
+        
+        .settings-form .field {
+            margin-bottom: 1.5rem;
+        }
+        
+        .settings-form .label {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .settings-form .input,
+        .settings-form .select select {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            transition: var(--transition);
+        }
+        
+        .settings-form .input:focus,
+        .settings-form .select select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+        }
+        
+        .settings-form .help {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .settings-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .settings-content {
+                padding: 1rem;
+            }
+            
+            .settings-actions {
+                flex-direction: column;
+            }
+            
+            .settings-actions .button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <div class="navbar-brand">
+                <img src="img/logobranca.png" alt="Logo Vida Plus">
+            </div>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-collapse">
+            <div class="profile-section">
+                <img src="https://cimrad.com.br/wp-content/uploads/elementor/thumbs/DSC06813.opti_-scaled-e1706629611456-r49r9bpx3k16kks5dbz0k7h57vvni4cg4rbaxecuq0.webp" alt="Foto do usuário">
+                <div class="name">Admin</div>
+                <div class="role">Administrador</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="pacientes.html">
+                        <i class="fas fa-user-injured"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profissionais.html">
+                        <i class="fas fa-user-md"></i>
+                        Profissionais
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendamento.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="telemedicina.html">
+                        <i class="fas fa-video"></i>
+                        Telemedicina
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <!-- Configurações Gerais -->
+                <div class="col-md-6">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Configurações Gerais</h2>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Nome da Clínica</label>
+                                    <input type="text" class="modern-form-control" value="Vida Plus">
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Email de Contato</label>
+                                    <input type="email" class="modern-form-control" value="contato@vidaplus.com">
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Telefone</label>
+                                    <input type="tel" class="modern-form-control" value="(11) 9999-9999">
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Endereço</label>
+                                    <textarea class="modern-textarea">Av. Paulista, 1000 - São Paulo, SP</textarea>
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Fuso Horário</label>
+                                    <select class="modern-select">
+                                        <option>America/Sao_Paulo</option>
+                                        <option>America/Manaus</option>
+                                        <option>America/Belem</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="modern-btn modern-btn-primary">
+                                    Salvar Alterações
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configurações de Aparência -->
+                <div class="col-md-6">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Aparência</h2>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Tema</label>
+                                    <select class="modern-select">
+                                        <option>Claro</option>
+                                        <option>Escuro</option>
+                                        <option>Sistema</option>
+                                    </select>
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Cor Primária</label>
+                                    <input type="color" class="modern-color-picker" value="#130058">
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Cor Secundária</label>
+                                    <input type="color" class="modern-color-picker" value="#6c63ff">
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Logo da Clínica</label>
+                                    <input type="file" class="modern-form-control">
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Favicon</label>
+                                    <input type="file" class="modern-form-control">
+                                </div>
+
+                                <button type="submit" class="modern-btn modern-btn-primary">
+                                    Salvar Alterações
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Configurações de Notificações -->
+                    <div class="modern-card mt-4">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Notificações</h2>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Notificações por Email</label>
+                                    <label class="modern-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="modern-switch-slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Notificações Push</label>
+                                    <label class="modern-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="modern-switch-slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="modern-form-group">
+                                    <label class="modern-form-label">Lembretes de Consulta</label>
+                                    <label class="modern-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="modern-switch-slider"></span>
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="modern-btn modern-btn-primary">
+                                    Salvar Alterações
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Manipulação do menu de configurações
+        document.querySelectorAll('.menu-list a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                // Esconde todas as seções
+                document.querySelectorAll('.box').forEach(box => {
+                    box.style.display = 'none';
+                });
+                
+                // Mostra a seção alvo
+                targetElement.style.display = 'block';
+                
+                // Atualiza o menu ativo
+                document.querySelectorAll('.menu-list a').forEach(a => {
+                    a.classList.remove('is-active');
+                });
+                link.classList.add('is-active');
+            });
+        });
+
+        // Manipulação do upload de arquivo
+        const fileInput = document.querySelector('.file-input');
+        const fileLabel = document.querySelector('.file-name');
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileLabel.textContent = fileInput.files[0].name;
+            } else {
+                fileLabel.textContent = 'Nenhum arquivo selecionado';
+            }
+        });
+
+        // Validação dos formulários
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (window.vidaPlus.validateForm(e.target)) {
+                    window.vidaPlus.showNotification('Configurações salvas com sucesso!', 'success');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

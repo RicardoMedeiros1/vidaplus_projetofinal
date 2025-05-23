@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - Vida Plus</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        /* Estilos específicos da página de administração */
+        .admin-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .admin-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+        
+        .admin-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        
+        .stat-card-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-card-label {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .admin-content {
+                padding: 1rem;
+            }
+            
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="index.html">
+                <img src="img/logobranca.png" alt="Vida Plus Logo" style="max-height: 200px; margin: 0 auto;">
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-collapse">
+            <div class="profile-section">
+                <img src="https://cimrad.com.br/wp-content/uploads/elementor/thumbs/DSC06813.opti_-scaled-e1706629611456-r49r9bpx3k16kks5dbz0k7h57vvni4cg4rbaxecuq0.webp" alt="Foto do usuário">
+                <div class="name">Admin</div>
+                <div class="role">Administrador</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="pacientes.html">
+                        <i class="fas fa-user-injured"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profissionais.html">
+                        <i class="fas fa-user-md"></i>
+                        Profissionais
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendamento.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="telemedicina.html">
+                        <i class="fas fa-video"></i>
+                        Telemedicina
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+
+
+                <!-- Conteúdo -->
+                <div class="column is-9">
+                    <!-- Estatísticas Rápidas -->
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <div class="dashboard-card stat-card">
+                                <div class="number">1,234</div>
+                                <div class="label">Total de Pacientes</div>
+                                <div class="trend has-text-success">
+                                    <span class="icon">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </span>
+                                    <span>12%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <div class="dashboard-card stat-card">
+                                <div class="number">45</div>
+                                <div class="label">Consultas Hoje</div>
+                                <div class="trend has-text-success">
+                                    <span class="icon">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </span>
+                                    <span>8%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <div class="dashboard-card stat-card">
+                                <div class="number">89%</div>
+                                <div class="label">Satisfação</div>
+                                <div class="trend has-text-success">
+                                    <span class="icon">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </span>
+                                    <span>5%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-3">
+                            <div class="dashboard-card stat-card">
+                                <div class="number">R$ 45.678</div>
+                                <div class="label">Faturamento Mensal</div>
+                                <div class="trend has-text-success">
+                                    <span class="icon">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </span>
+                                    <span>15%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gráficos -->
+                    <div class="columns">
+                        <div class="column is-8">
+                            <div class="dashboard-card">
+                                <h2 class="title is-4">Atendimentos por Especialidade</h2>
+                                <canvas id="atendimentosChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="dashboard-card">
+                                <h2 class="title is-4">Distribuição de Pacientes</h2>
+                                <canvas id="pacientesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Últimas Atividades -->
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="dashboard-card">
+                                <h2 class="title is-4">Últimas Consultas</h2>
+                                <div class="table-container">
+                                    <table class="table is-fullwidth">
+                                        <thead>
+                                            <tr>
+                                                <th>Paciente</th>
+                                                <th>Especialidade</th>
+                                                <th>Médico</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>João Silva</td>
+                                                <td>Cardiologia</td>
+                                                <td>Dr. Carlos</td>
+                                                <td><span class="tag is-success">Concluída</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maria Santos</td>
+                                                <td>Dermatologia</td>
+                                                <td>Dra. Ana</td>
+                                                <td><span class="tag is-warning">Em Andamento</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pedro Oliveira</td>
+                                                <td>Ortopedia</td>
+                                                <td>Dr. Paulo</td>
+                                                <td><span class="tag is-info">Agendada</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-6">
+                            <div class="dashboard-card">
+                                <h2 class="title is-4">Avaliações Recentes</h2>
+                                <div class="content">
+                                    <div class="notification">
+                                        <div class="level">
+                                            <div class="level-left">
+                                                <div>
+                                                    <p class="has-text-weight-bold">Dr. Carlos Silva</p>
+                                                    <p class="has-text-grey">Cardiologia</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="stars">
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>"Excelente atendimento, muito profissional e atencioso."</p>
+                                    </div>
+                                    <div class="notification">
+                                        <div class="level">
+                                            <div class="level-left">
+                                                <div>
+                                                    <p class="has-text-weight-bold">Dra. Ana Santos</p>
+                                                    <p class="has-text-grey">Dermatologia</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="stars">
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-warning">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="icon has-text-grey">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>"Muito boa profissional, diagnóstico preciso."</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Gráfico de Atendimentos
+        const atendimentosCtx = document.getElementById('atendimentosChart').getContext('2d');
+        new Chart(atendimentosCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Cardiologia', 'Dermatologia', 'Ortopedia', 'Pediatria', 'Ginecologia'],
+                datasets: [{
+                    label: 'Atendimentos',
+                    data: [65, 59, 80, 81, 56],
+                    backgroundColor: [
+                        'rgba(52, 152, 219, 0.8)',
+                        'rgba(46, 204, 113, 0.8)',
+                        'rgba(155, 89, 182, 0.8)',
+                        'rgba(241, 196, 15, 0.8)',
+                        'rgba(231, 76, 60, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Gráfico de Distribuição de Pacientes
+        const pacientesCtx = document.getElementById('pacientesChart').getContext('2d');
+        new Chart(pacientesCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Particular', 'Unimed', 'Amil', 'SulAmérica', 'Outros'],
+                datasets: [{
+                    data: [30, 25, 20, 15, 10],
+                    backgroundColor: [
+                        'rgba(52, 152, 219, 0.8)',
+                        'rgba(46, 204, 113, 0.8)',
+                        'rgba(155, 89, 182, 0.8)',
+                        'rgba(241, 196, 15, 0.8)',
+                        'rgba(231, 76, 60, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

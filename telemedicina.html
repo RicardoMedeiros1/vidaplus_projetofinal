@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telemedicina - Vida Plus</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .video-container {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .video-box {
+            aspect-ratio: 16/9;
+            background-color: #2d2d2d;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .video-placeholder {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+        }
+
+        .chat-container {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .chat-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .message-body {
+            background-color: #ffffff;
+            padding: 0.75rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos modernos para cards e campos */
+        .modern-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .modern-card .card-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+
+        .modern-card .card-body {
+            padding: 2rem;
+        }
+
+        .modern-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .modern-form-label {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .modern-form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .modern-form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(19, 0, 88, 0.15);
+        }
+
+        .modern-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .modern-btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .modern-btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .modern-video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16/9;
+        }
+
+        .modern-video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .modern-video-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modern-video-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modern-video-btn.active {
+            background: var(--accent-color);
+        }
+
+        .modern-chat-container {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modern-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .modern-chat-message {
+            margin-bottom: 1rem;
+            max-width: 80%;
+        }
+
+        .modern-chat-message.sent {
+            margin-left: auto;
+        }
+
+        .modern-chat-message.received {
+            margin-right: auto;
+        }
+
+        .modern-chat-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .modern-chat-message.sent .modern-chat-bubble {
+            background: var(--primary-color);
+            color: white;
+            border-top-right-radius: 4px;
+        }
+
+        .modern-chat-message.received .modern-chat-bubble {
+            background: var(--light-bg);
+            color: var(--text-color);
+            border-top-left-radius: 4px;
+        }
+
+        .modern-chat-input {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .modern-chat-input input {
+            flex: 1;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .modern-chat-input input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .modern-chat-input button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            border: none;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modern-chat-input button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .modern-participants {
+            padding: 1rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+        }
+
+        .modern-participant {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .modern-participant:hover {
+            background: rgba(19, 0, 88, 0.05);
+        }
+
+        .modern-participant-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .modern-participant-info {
+            flex: 1;
+        }
+
+        .modern-participant-name {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .modern-participant-role {
+            font-size: 0.875rem;
+            color: #666;
+        }
+
+        .modern-participant-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+
+        .modern-participant-status.offline {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark">
+        <div class="navbar-brand">
+            <img src="img/logobranca.png" alt="Logo Vida Plus">
+        </div>
+        <div class="navbar-collapse">
+            <div class="profile-section">
+                <img src="https://cimrad.com.br/wp-content/uploads/elementor/thumbs/DSC06813.opti_-scaled-e1706629611456-r49r9bpx3k16kks5dbz0k7h57vvni4cg4rbaxecuq0.webp" alt="Foto do usuário">
+                <div class="name">Dr. Ricardo</div>
+                <div class="role">Médico</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="pacientes.html">
+                        <i class="fas fa-user-injured"></i>
+                        Pacientes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profissionais.html">
+                        <i class="fas fa-user-md"></i>
+                        Profissionais
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendamento.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        Agendamento
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="telemedicina.html">
+                        <i class="fas fa-video"></i>
+                        Telemedicina
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="btn btn-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <!-- Área de Vídeo -->
+                <div class="col-md-8">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Consulta Virtual</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="modern-video-container">
+                                <video id="localVideo" autoplay muted playsinline></video>
+                                <div class="modern-video-controls">
+                                    <button class="modern-video-btn" title="Microfone">
+                                        <i class="fas fa-microphone"></i>
+                                    </button>
+                                    <button class="modern-video-btn" title="Câmera">
+                                        <i class="fas fa-video"></i>
+                                    </button>
+                                    <button class="modern-video-btn" title="Compartilhar Tela">
+                                        <i class="fas fa-desktop"></i>
+                                    </button>
+                                    <button class="modern-video-btn" title="Encerrar Chamada">
+                                        <i class="fas fa-phone-slash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de Chat e Participantes -->
+                <div class="col-md-4">
+                    <div class="modern-card">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Chat</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="modern-chat-container">
+                                <div class="modern-chat-messages">
+                                    <div class="modern-chat-message received">
+                                        <div class="modern-chat-bubble">
+                                            Olá! Como posso ajudar você hoje?
+                                        </div>
+                                    </div>
+                                    <div class="modern-chat-message sent">
+                                        <div class="modern-chat-bubble">
+                                            Estou com dor de cabeça há dois dias.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modern-chat-input">
+                                    <input type="text" placeholder="Digite sua mensagem...">
+                                    <button>
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modern-card mt-4">
+                        <div class="card-header">
+                            <h2 class="h4 mb-0 text-white">Participantes</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="modern-participants">
+                                <div class="modern-participant">
+                                    <div class="modern-participant-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="modern-participant-info">
+                                        <div class="modern-participant-name">Dr. Carlos Santos</div>
+                                        <div class="modern-participant-role">Médico</div>
+                                    </div>
+                                    <div class="modern-participant-status"></div>
+                                </div>
+                                <div class="modern-participant">
+                                    <div class="modern-participant-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="modern-participant-info">
+                                        <div class="modern-participant-name">Maria Silva</div>
+                                        <div class="modern-participant-role">Paciente</div>
+                                    </div>
+                                    <div class="modern-participant-status"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        // Validação do formulário de prontuário
+        document.getElementById('prontuarioForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!window.vidaPlus.validateForm(e.target)) {
+                window.vidaPlus.showNotification('Por favor, preencha todos os campos obrigatórios.', 'danger');
+                return;
+            }
+
+            // Simulação de salvamento
+            window.vidaPlus.showNotification('Prontuário salvo com sucesso!', 'success');
+        });
+
+        // Simulação de chat
+        const chatInput = document.querySelector('.chat-container input');
+        const chatMessages = document.querySelector('.chat-messages');
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && chatInput.value.trim()) {
+                const message = document.createElement('div');
+                message.className = 'message';
+                message.innerHTML = `
+                    <div class="message-header">
+                        <p>Você</p>
+                        <span class="tag is-success">Paciente</span>
+                    </div>
+                    <div class="message-body">
+                        ${chatInput.value}
+                    </div>
+                `;
+                chatMessages.appendChild(message);
+                chatInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html> 

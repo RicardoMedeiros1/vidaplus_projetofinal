@@ -1,0 +1,132 @@
+@startuml Diagrama de Caso de Uso
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+
+actor Paciente
+actor Profissional
+actor Administrador
+
+rectangle "Sistema VidaPlus" {
+    usecase "Login" as UC1
+    usecase "Cadastro" as UC2
+    usecase "Agendar Consulta" as UC3
+    usecase "Realizar Telemedicina" as UC4
+    usecase "Visualizar Histórico" as UC5
+    usecase "Gerenciar Usuários" as UC6
+    usecase "Gerar Relatórios" as UC7
+    usecase "Configurar Sistema" as UC8
+}
+
+Paciente --> UC1
+Paciente --> UC2
+Paciente --> UC3
+Paciente --> UC4
+Paciente --> UC5
+
+Profissional --> UC1
+Profissional --> UC4
+Profissional --> UC5
+
+Administrador --> UC1
+Administrador --> UC6
+Administrador --> UC7
+Administrador --> UC8
+@enduml
+
+@startuml Diagrama de Classe
+skinparam classAttributeIconSize 0
+
+class Usuario {
+    -id: int
+    -nome: string
+    -email: string
+    -senha: string
+    +login()
+    +logout()
+}
+
+class Paciente {
+    -cpf: string
+    -dataNascimento: date
+    -telefone: string
+    +agendarConsulta()
+    +visualizarHistorico()
+}
+
+class Profissional {
+    -crm: string
+    -especialidade: string
+    +realizarConsulta()
+    +gerarReceita()
+}
+
+class Consulta {
+    -id: int
+    -data: datetime
+    -tipo: string
+    -status: string
+    +agendar()
+    +cancelar()
+}
+
+class Administrador {
+    +gerenciarUsuarios()
+    +gerarRelatorios()
+    +configurarSistema()
+}
+
+Paciente --|> Usuario
+Profissional --|> Usuario
+Administrador --|> Usuario
+Consulta "1" -- "1" Paciente
+Consulta "1" -- "1" Profissional
+@enduml
+
+@startuml Diagrama ER
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+!define foreign_key(x) #x#
+
+skinparam class {
+    BackgroundColor white
+    ArrowColor black
+    BorderColor black
+}
+
+table(usuarios) {
+    primary_key(id): int
+    nome: varchar
+    email: varchar
+    senha: varchar
+    tipo: varchar
+}
+
+table(pacientes) {
+    primary_key(id): int
+    foreign_key(usuario_id): int
+    cpf: varchar
+    data_nascimento: date
+    telefone: varchar
+}
+
+table(profissionais) {
+    primary_key(id): int
+    foreign_key(usuario_id): int
+    crm: varchar
+    especialidade: varchar
+}
+
+table(consultas) {
+    primary_key(id): int
+    foreign_key(paciente_id): int
+    foreign_key(profissional_id): int
+    data: datetime
+    tipo: varchar
+    status: varchar
+}
+
+usuarios "1" -- "1" pacientes
+usuarios "1" -- "1" profissionais
+pacientes "1" -- "*" consultas
+profissionais "1" -- "*" consultas
+@enduml 

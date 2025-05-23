@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Vida Plus</title>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-color: #130058;
+            --secondary-color: #2a1b6d;
+            --accent-color: #4CAF50;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --animation-timing: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all var(--animation-timing);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-text {
+            color: #666;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        body {
+            background: var(--background-color);
+        }
+        .cadastro-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover;
+            position: relative;
+            padding: 2rem;
+            margin: 0;
+            width: 100%;
+        }
+        .cadastro-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(19, 0, 88, 0.9);
+        }
+        .cadastro-card {
+            background: #fff;
+            border: 1.5px solid #E5EAF1;
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(21, 111, 245, 0.04);
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+            transform: translateY(0);
+        }
+        .cadastro-logo {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .cadastro-logo img {
+            max-width: 320px;
+            height: auto;
+            margin: 0 auto;
+        }
+        .cadastro-title {
+            color: rgba(19, 0, 88, 0.9);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .input, .button {
+            font-size: 1.08rem;
+        }
+        .button.is-primary {
+            background: rgba(19, 0, 88, 0.9);
+            color: #fff;
+            width: 100%;
+        }
+        .button.is-primary:hover {
+            background: rgba(19, 0, 88, 0.9);
+            color: #fff;
+        }
+        .has-text-link {
+            color: var(--primary-color) !important;
+        }
+        .cadastro-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+        }
+        .cadastro-footer a {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        .icon.is-left {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="cadastro-container">
+        <div class="cadastro-card">
+            <div class="cadastro-logo">
+                <img src="img/logo2.png" alt="Vida Plus Logo">
+            </div>
+            <h1 class="cadastro-title">Criar Nova Conta</h1>
+            <form id="cadastroForm">
+                <!-- Dados Pessoais -->
+                <div class="field">
+                    <label class="label">Nome Completo</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" placeholder="Digite seu nome completo" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">E-mail</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="email" placeholder="Digite seu e-mail" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">CPF</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" placeholder="000.000.000-00" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-id-card"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Telefone</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="tel" placeholder="(00) 00000-0000" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-phone"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Dados de Acesso -->
+                <div class="field">
+                    <label class="label">Nome de Usuário</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" placeholder="Escolha um nome de usuário" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-at"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Senha</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Digite sua senha" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                    <p class="help">A senha deve ter pelo menos 8 caracteres, incluindo letras e números</p>
+                </div>
+
+                <div class="field">
+                    <label class="label">Confirmar Senha</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" placeholder="Confirme sua senha" required>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Tipo de Usuário -->
+                <div class="field">
+                    <label class="label">Tipo de Usuário</label>
+                    <div class="control">
+                        <div class="select is-fullwidth">
+                            <select required>
+                                <option value="">Selecione o tipo de usuário</option>
+                                <option value="paciente">Paciente</option>
+                                <option value="medico">Médico</option>
+                                <option value="enfermeiro">Enfermeiro</option>
+                                <option value="admin">Administrador</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Termos e Condições -->
+                <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                            <input type="checkbox" required>
+                            Li e aceito os <a href="#">Termos de Uso</a> e a <a href="#">Política de Privacidade</a>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <button class="button is-primary" type="submit">
+                        <span class="icon">
+                            <i class="fas fa-user-plus"></i>
+                        </span>
+                        <span>Cadastrar</span>
+                    </button>
+                </div>
+
+                <div class="cadastro-footer">
+                    <p>Já possui uma conta? <a href="login.html">Faça login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('cadastroForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!window.vidaPlus.validateForm(e.target)) {
+                window.vidaPlus.showNotification('Por favor, preencha todos os campos obrigatórios.', 'danger');
+                return;
+            }
+
+            // Simulação de cadastro
+            window.vidaPlus.showNotification('Cadastro realizado com sucesso!', 'success');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+
+        // Máscara para CPF
+        const cpfInput = document.querySelector('input[type="text"][placeholder="000.000.000-00"]');
+        cpfInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                e.target.value = value;
+            }
+        });
+
+        // Máscara para telefone
+        const telefoneInput = document.querySelector('input[type="tel"]');
+        telefoneInput.addEventListener('input', (e) => {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+</html> 
