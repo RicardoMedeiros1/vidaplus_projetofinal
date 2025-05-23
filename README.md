@@ -99,4 +99,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 Seu Nome - [@vidaplus](https://twitter.com/vidaplusoficial) - vidapluscontato@gmail.com
 
-Link do Projeto: [https://github.com/seu-usuario/vida-plus](https://github.com/RicardoMedeiros1/vidaplus_projetofinal.git) 
+Link do Projeto: [https://github.com/RicardoMedeiros1/vidaplus_projetofinal](https://github.com/RicardoMedeiros1/vidaplus_projetofinal.git) 
